@@ -11,4 +11,21 @@ export class UserController {
       res.status(500).json({ error: err.message });
     }
   }
+
+  static async createUser(req: Request, res: Response) {
+    try {
+      const user: User = req.body;
+      const existingUser = await UserService.findUserByEmail(user.email);
+
+      if (existingUser) {
+        return res
+          .status(400)
+          .json({ message: 'Email already exists in the database' });
+      }
+      await UserService.createUser(user);
+      res.json({ message: 'User created successfully' });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 }
