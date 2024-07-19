@@ -16,3 +16,8 @@ export interface CreateUser {
   contactNumber: number;
   password: string;
 }
+
+export interface LoginUser {
+  email: string;
+  password: string;
+}
