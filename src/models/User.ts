@@ -4,7 +4,6 @@ export interface User {
   contactNumber: number;
   email: string;
   password: string;
-  isDeletable: string;
   status: string;
   role: string;
   profilePicUrl: string;
@@ -21,3 +20,4 @@ export interface LoginUser {
   email: string;
   password: string;
 }
+
