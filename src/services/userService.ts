@@ -84,10 +84,26 @@ export class UserService {
       throw err;
     }
   }
-  static async updateUser(id: number, status: boolean): Promise<void> {
+  static async updateStatus(id: number, status: boolean): Promise<void> {
     return new Promise((resolve, reject) => {
       const query = 'update users set status=? where id=?';
       connection.query(query, [status, id], (err: any, results: any) => {
+        if (!err) {
+          if (results.affectedRows === 0) {
+            reject(new Error('User not found'));
+          } else {
+            resolve(results);
+          }
+        } else {
+          reject(err);
+        }
+      });
+    });
+  }
+  static async updateUserRole(id: number, role: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const query = 'update users set role=? where id=?';
+      connection.query(query, [role, id], (err: any, results: any) => {
         if (!err) {
           if (results.affectedRows === 0) {
             reject(new Error('User not found'));

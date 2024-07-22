@@ -45,16 +45,33 @@ export class UserController {
     }
   }
 
-  static async updateUser(req: Request, res: Response) {
+  static async updateUserStatus(req: Request, res: Response) {
     try {
       const user = req.body;
-      await UserService.updateUser(user.id, user.status);
+      await UserService.updateStatus(user.id, user.status);
       if (user.status === 'true') {
         return res.status(200).json({ message: 'User activated successfully' });
       } else if (user.status === 'false') {
         return res
           .status(200)
           .json({ message: 'User deactivated successfully' });
+      }
+    } catch (err: any) {
+      return res.status(500).json({ error: err.message });
+    }
+  }
+  static async updateUserRole(req: Request, res: Response) {
+    try {
+      const user = req.body;
+      await UserService.updateUserRole(user.id, user.role);
+      if (user.role === 'admin') {
+        return res
+          .status(200)
+          .json({ message: 'User role updated to admin successfully' });
+      } else if (user.role === 'user') {
+        return res
+          .status(200)
+          .json({ message: 'User role updated to user successfully' });
       }
     } catch (err: any) {
       return res.status(500).json({ error: err.message });

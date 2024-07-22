@@ -8,6 +8,6 @@ const router = express.Router(); // Create a new router
 router.get('/getUsers', authenticateToken, UserController.getAllUsers);
 router.post('/createUser', UserController.createUser);
 router.post('/login', UserController.login);
-router.patch('/updateUser',  authenticateToken, checkRole, UserController.updateUser);
-
+router.patch('/updateUserStatus',  authenticateToken, checkRole, UserController.updateUserStatus);
+router.patch('/updateUserRole', authenticateToken, checkRole, UserController.updateUserRole);
 export default router;
