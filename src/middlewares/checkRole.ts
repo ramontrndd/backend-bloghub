@@ -1,13 +1,14 @@
 import dotenv from 'dotenv';
+import { Request, Response, NextFunction } from 'express';
 
 dotenv.config();
 
-function checkRole(req: any, res: any, next: any) {
-  const user = res.locals.user;
-  if (user.role === process.env.USER) {
-    next();
+export function checkRole(req: Request, res: Response, next: NextFunction) {
+ const user = res.locals.user;
+  if (user === process.env.USER) {
+    res.sendStatus(401);
   } else {
-    res.sendStatus(403);
+    next();
   }
 }
 
