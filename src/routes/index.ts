@@ -10,4 +10,5 @@ router.post('/createUser', UserController.createUser);
 router.post('/login', UserController.login);
 router.patch('/updateUserStatus',  authenticateToken, checkRole, UserController.updateUserStatus);
 router.patch('/updateUserRole', authenticateToken, checkRole, UserController.updateUserRole);
+
 export default router;
