@@ -36,4 +36,24 @@ export class CategoryService {
       );
     });
   }
+
+  static async updateCategory(updateCategory: Category): Promise<Category> {
+    return new Promise((resolve, reject) => {
+      const query = 'UPDATE category SET name = ? WHERE id = ?';
+      connection.query(
+        query,
+        [updateCategory.name, updateCategory.id],
+        (err: any, results: any) => {
+          if (!err) {
+            if(results.affectedRows == 0) {
+              return reject(new Error('Category ID does not found'));
+            }
+            resolve(results);
+          } else {
+            reject(new Error(err));
+          }
+        },
+      );
+    });
+  }
 }

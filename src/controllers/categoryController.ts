@@ -20,4 +20,17 @@ export class CategoryController {
       res.status(500).json({ error: err.message });
     }
   }
+  static async updateCategory(req: Request, res: Response) {
+    try {
+      let updateCategory = req.body;
+      await CategoryService.updateCategory(updateCategory);
+      res.json({ message: 'Category updated successfully' });
+    } catch (err: any) {
+      if(err === 'Category ID does not found') {
+        return res.status(404).json({ error: err });
+        
+      }
+      res.status(500).json({ error: err.message });
+    }
+  }
 }

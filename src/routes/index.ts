@@ -16,5 +16,6 @@ router.get('/checkToken', authenticateToken, UserController.checkToken);
 
 router.post('/newCategory', authenticateToken, CategoryController.createNewCategory);
 router.get('/getCategory', authenticateToken, CategoryController.getCategory);
+router.patch('/updateCategory', authenticateToken, CategoryController.updateCategory);
 
 export default router;
