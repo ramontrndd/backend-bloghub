@@ -31,4 +31,17 @@ export class Articles {
       res.status(500).json({ message: err.message });
     }
   }
+  static async deleteArticle (req: Request, res: Response) {
+    try{
+      const article = Number(req.params.id);
+      await ArticleService.deleteArticle(article)
+      return res.status(200).json({message: 'Article deleted sucessfully'})
+    }
+    catch(err:any){
+      if(err.message === 'Arcicle ID does not exist') {
+        return res.status(404).json({ message: err.message })
+        
+      }
+    }
+  }
 }

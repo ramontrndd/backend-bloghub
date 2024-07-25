@@ -55,5 +55,20 @@ export class ArticleService {
       });
     });
   }
-
+static async deleteArticle(id:number): Promise<void> { 
+  return new Promise((resolve, reject)=> {
+    const query = "DELETE from articles WHERE id=?"
+    connection.query(query,[id], (err:any , results:any)=> {
+      if(!err) {
+        if(results.affectedRows === 0) { 
+          reject(new Error('Arcicle ID does not exist'))
+        }
+        resolve(results)
+      }
+      else {
+        reject(new Error(err.message))
+      }
+    })
+  })
+}
 }

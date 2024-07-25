@@ -23,7 +23,8 @@ router.patch('/updateCategory', authenticateToken, CategoryController.updateCate
 
 router.post('/newArticle', authenticateToken, Articles.createNewArticle);
 router.get('/getAllArticles', authenticateToken, Articles.getAllArticles);
-router.post('/updateArticle',  authenticateToken, Articles.updateArticle);
+router.patch('/updateArticle',  authenticateToken, Articles.updateArticle);
+router.delete('/deleteArticle/:id', authenticateToken, Articles.deleteArticle);
 
 
 export default router;
