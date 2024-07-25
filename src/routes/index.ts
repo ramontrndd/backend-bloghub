@@ -3,6 +3,8 @@ import { UserController } from '../controllers/userController';
 import { authenticateToken } from '../middlewares/authMiddleware';
 import { checkRole } from '../middlewares/checkRole'
 import { CategoryController } from '../controllers/categoryController';
+import { Articles } from '../controllers/articleController';
+
 
 const router = express.Router(); // Create a new router
 
@@ -17,5 +19,8 @@ router.get('/checkToken', authenticateToken, UserController.checkToken);
 router.post('/newCategory', authenticateToken, CategoryController.createNewCategory);
 router.get('/getCategory', authenticateToken, CategoryController.getCategory);
 router.patch('/updateCategory', authenticateToken, CategoryController.updateCategory);
+
+
+router.post('/newArticle', authenticateToken, Articles.createNewArticle);
 
 export default router;
