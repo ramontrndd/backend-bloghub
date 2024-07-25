@@ -11,4 +11,12 @@ export class Articles {
       res.status(500).json({ message: err.message });
     }
   }
+  static async getAllArticles(req: Request, res: Response) {
+    try {
+      const articles = await ArticleService.getAllArticles();
+      res.json(articles);
+    } catch (err: any) {
+      res.status(500).json({ message: err.message });
+    }
+  }
 }
