@@ -19,4 +19,16 @@ export class Articles {
       res.status(500).json({ message: err.message });
     }
   }
+  static async updateArticle(req: Request, res: Response) {
+    try {
+      let article = req.body;
+      await ArticleService.updateArticle(article);
+      res.status(200).json({ message: 'Article updated successfully' });
+    } catch (err: any) {
+      if (err.message === 'Article ID Does not found') {
+        return res.status(404).json({ message: err.message });
+      }
+      res.status(500).json({ message: err.message });
+    }
+  }
 }

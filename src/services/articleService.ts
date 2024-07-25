@@ -1,5 +1,6 @@
+import { ArticleModel } from './../models/Article';
 import connection from '../config/connection';
-import { ArticleModel } from '../models/Article';
+
 
 export class ArticleService {
   static async createNewArticle(article: ArticleModel): Promise<ArticleModel> {
@@ -38,4 +39,21 @@ export class ArticleService {
       });
     });
   }
+
+  static async updateArticle(article: ArticleModel): Promise<void> { 
+    return new Promise ((resolve, reject) => {
+      const query = 'UPDATE articles SET title = ?, content = ?, category_id = ?, status = ? WHERE id = ?';
+      connection.query(query, [article.title, article.content, article.categoryId, article.status, article.id], (err: any, results:any) => {
+        if (!err) {
+          if (results.affectedRows === 0) {
+            reject(new Error('Article ID Does not found'));
+          }
+          resolve(results);
+        } else {
+          reject(new Error(err.message));
+        }
+      });
+    });
+  }
+
 }
