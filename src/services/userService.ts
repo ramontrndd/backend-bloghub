@@ -9,7 +9,7 @@ export class UserService {
     return new Promise((resolve, reject) => {
       connection.query('SELECT * FROM users', (err: any, results: User[]) => {
         if (err) {
-          reject(err);
+          reject(new Error(err));
         } else {
           resolve(results);
         }
@@ -32,7 +32,7 @@ export class UserService {
         ],
         (err: any, results: User) => {
           if (err) {
-            reject(err);
+            reject(new Error(err));
           } else {
             resolve(results);
           }
@@ -45,7 +45,7 @@ export class UserService {
       const query = 'SELECT * FROM users WHERE email = ?';
       connection.query(query, [email], (err: any, results: User[]) => {
         if (err) {
-          reject(err);
+          reject(new Error(err));
         } else {
           resolve(results[0]);
         }
@@ -80,8 +80,8 @@ export class UserService {
       );
 
       return { token: accessToken };
-    } catch (err) {
-      throw err;
+    } catch (err:any) {
+      throw new Error(err);
     }
   }
   static async updateStatus(id: number, status: boolean): Promise<void> {
@@ -95,7 +95,7 @@ export class UserService {
             resolve(results);
           }
         } else {
-          reject(err);
+          reject(new Error(err));
         }
       });
     });
@@ -111,7 +111,7 @@ export class UserService {
             resolve(results);
           }
         } else {
-          reject(err);
+          reject(new Error(err));
         }
       });
     });
