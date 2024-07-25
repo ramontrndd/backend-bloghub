@@ -11,4 +11,13 @@ export class CategoryController {
       res.status(500).json({ error: err.message });
     }
   }
+  static async getCategory(req: Request, res: Response) {
+    try {
+      let getCategory = req.body;
+      const category = await CategoryService.getAllCategory(getCategory);
+      res.json(category);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 }

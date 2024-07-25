@@ -12,6 +12,9 @@ router.post('/login', UserController.login);
 router.patch('/updateUserStatus',  authenticateToken, checkRole, UserController.updateUserStatus);
 router.patch('/updateUserRole', authenticateToken, checkRole, UserController.updateUserRole);
 router.get('/checkToken', authenticateToken, UserController.checkToken);
+
+
 router.post('/newCategory', authenticateToken, CategoryController.createNewCategory);
+router.get('/getCategory', authenticateToken, CategoryController.getCategory);
 
 export default router;
