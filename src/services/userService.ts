@@ -80,7 +80,7 @@ export class UserService {
       );
 
       return { token: accessToken };
-    } catch (err:any) {
+    } catch (err: any) {
       throw new Error(err);
     }
   }
@@ -114,6 +114,21 @@ export class UserService {
           reject(new Error(err));
         }
       });
+    });
+  }
+  static async verifyToken(token: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      jwt.verify(
+        token,
+        process.env.ACCESS_TOKEN_SECRET as string,
+        (err, decoded) => {
+          if (err) {
+            reject(new Error('Token is not valid'));
+          } else {
+            resolve(decoded);
+          }
+        },
+      );
     });
   }
 }

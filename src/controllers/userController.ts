@@ -77,4 +77,17 @@ export class UserController {
       return res.status(500).json({ error: err.message });
     }
   }
+  static async checkToken(req: Request, res: Response) {
+    try {
+      const token = req.header('Authorization')?.replace('Bearer ', '');
+      if (!token) {
+        return res.status(401).json({ message: 'Unauthorized' });
+      }
+      const decoded = await UserService.verifyToken(token);
+      res.status(200).json({ message: 'Token is valid', decoded });
+    } catch (err: any) {
+      console.error('Error: ', err.message);
+      res.status(401).json({ message: 'Token is invalid, Acess Unauthorized' });
+    }
+  }
 }
