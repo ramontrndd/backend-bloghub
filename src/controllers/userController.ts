@@ -39,7 +39,9 @@ export class UserController {
       }
 
       res.cookie('token', result.token, { httpOnly: true, secure: false });
-      return res.status(200).json({ token: result.token });
+      return res
+        .status(200)
+        .json({ token: result.token, message: 'Login Sucessfully' });
     } catch (err: any) {
       return res.status(500).json({ error: err.message });
     }
